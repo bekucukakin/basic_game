@@ -97,3 +97,13 @@ body {
 #stopButton:hover {
     background: #c0392b;
 }
+
+#soundToggle {
+    background: #2980b9;
+    margin-left: 15px;
+    padding: 8px 15px;
+  }
+  
+  #soundToggle:hover {
+    background: #2471a3;
+  }

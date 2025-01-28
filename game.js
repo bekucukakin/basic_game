@@ -1,4 +1,4 @@
-class Game {
+class BatakGame {
     constructor() {
       // DOM Elementleri
       this.elements = {
@@ -41,11 +41,14 @@ class Game {
         timer: null
       };
   
-      // Event Listener'ları başlat
+      // Ses Ayarları
+      this.soundEnabled = true;
+      this.initializeSounds();
+      this.createSoundToggle();
+  
+      // Oyunu Başlat
       this.initializeEventListeners();
-      // Oyun alanını oluştur
       this.createGameBoard();
-      // Skorları güncelle
       this.updateDisplay();
     }
   
@@ -55,6 +58,22 @@ class Game {
       this.elements.difficultySelect.addEventListener('change', (e) => 
         this.handleDifficultyChange(e.target.value)
       );
+    }
+  
+    initializeSounds() {
+      this.sounds = {
+        red: this.createSound('sounds/red.mp3'),
+        green: this.createSound('sounds/green.mp3'),
+        blue: this.createSound('sounds/blue.mp3'),
+        yellow: this.createSound('sounds/yellow.mp3'),
+        gameOver: this.createSound('sounds/game-over.mp3')
+      };
+    }
+  
+    createSound(src) {
+      const audio = new Audio(src);
+      audio.preload = 'auto';
+      return audio;
     }
   
     createGameBoard() {
@@ -120,6 +139,7 @@ class Game {
         localStorage.setItem('batakHighScore', this.state.highScore);
       }
       
+      this.playSound('gameOver');
       this.updateDisplay();
     }
   
@@ -128,6 +148,7 @@ class Game {
   
       const points = parseInt(event.target.dataset.points);
       this.state.score += points;
+      this.playColorSound(event.target.style.backgroundColor);
       event.target.classList.remove('lit');
       this.updateDisplay();
     }
@@ -181,7 +202,44 @@ class Game {
       clearInterval(this.intervals.game);
       clearInterval(this.intervals.timer);
     }
+  
+    playSound(soundName) {
+      if(!this.soundEnabled || !this.sounds[soundName]) return;
+      
+      try {
+        const sound = this.sounds[soundName];
+        sound.currentTime = 0;
+        sound.play();
+      } catch(e) {
+        console.error('Ses çalınamadı:', e);
+      }
+    }
+  
+    playColorSound(color) {
+      const colorMap = {
+        '#e74c3c': 'red',
+        '#2ecc71': 'green',
+        '#3498db': 'blue',
+        '#f1c40f': 'yellow'
+      };
+      this.playSound(colorMap[color] || 'red');
+    }
+  
+    createSoundToggle() {
+      const soundButton = document.createElement('button');
+      soundButton.id = 'soundToggle';
+      soundButton.textContent = '🔊 Ses Açık';
+      soundButton.addEventListener('click', () => this.toggleSound());
+      document.querySelector('.controls').appendChild(soundButton);
+    }
+  
+    toggleSound() {
+      this.soundEnabled = !this.soundEnabled;
+      const soundButton = document.getElementById('soundToggle');
+      soundButton.textContent = this.soundEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+      soundButton.style.backgroundColor = this.soundEnabled ? '#2980b9' : '#7f8c8d';
+    }
   }
   
   // Oyunu Başlat
-  document.addEventListener('DOMContentLoaded', () => new Game());
+  document.addEventListener('DOMContentLoaded', () => new BatakGame());
