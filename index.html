@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Oyun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+       
+        
+        <div class="game-info">
+            <div id="highScore">Yüksek Skor: 0</div>
+            <div id="score">Skor: 0</div>
+            <div id="timer">Kalan Süre: 30</div>
+        </div>
+
+        <div class="difficulty-select">
+            <label for="difficulty">Zorluk Seviyesi:</label>
+            <select id="difficulty">
+                <option value="easy">Kolay</option>
+                <option value="medium" selected>Orta</option>
+                <option value="hard">Zor</option>
+            </select>
+        </div>
+
+        <div id="gameContainer"></div>
+
+        <div class="controls">
+            <button id="startButton">Oyuna Başla</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

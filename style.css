@@ -1,0 +1,85 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    font-size: 1.2rem;
+}
+
+#gameContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 2rem 0;
+}
+
+.game-button {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #34495e;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-button.lit {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
+.game-button::after {
+    content: attr(data-points);
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+.controls button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background: #27ae60;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background: #219a52;
+}
+
+.difficulty-select {
+    margin: 1rem 0;
+}
+
+.difficulty-select select {
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
