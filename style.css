@@ -83,3 +83,17 @@ body {
     border-radius: 5px;
     margin-left: 10px;
 }
+
+#difficulty:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+#stopButton {
+    background: #e74c3c;
+    margin-left: 10px;
+}
+
+#stopButton:hover {
+    background: #c0392b;
+}
